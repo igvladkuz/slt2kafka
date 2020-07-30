@@ -26,16 +26,15 @@ object KafkaProducerFunctionHandling {
   }
 
   def registerFunctionHandler(server: JCoServer): Unit = {
-    val kafkaProducerHandler = new KafkaProducerFunctionHandling.KafkaProducerHandler
     val factory = new DefaultServerHandlerFactory.FunctionHandlerFactory
-    factory.registerHandler(FUNCTION_NAME, kafkaProducerHandler)
+    factory.registerHandler(FUNCTION_NAME, KafkaProducerHandler)
     server.setCallHandlerFactory(factory)
   }
 
   /**
    * This class provides the implementation for the function FUNCTION_NAME.
    */
-  object KafkaProducerHandler {
+  object KafkaProducerHandler extends JCoServerFunctionHandler {
     val IN_PARAM = "MSG"
     val OUT_PARAM = "RESP"
     //static Producer<String, String> producer = null;
@@ -56,9 +55,7 @@ object KafkaProducerFunctionHandling {
         System.exit(0)
         null //unreachable
     }
-  }
 
-  class KafkaProducerHandler extends JCoServerFunctionHandler {
     override def handleRequest(serverCtx: JCoServerContext, function: JCoFunction): Unit = {
       System.out.println("----------------------------------------------------------------")
       System.out.println("Called function   : " + function.getName)
