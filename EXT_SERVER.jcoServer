@@ -1,0 +1,8 @@
+#A sample confidguration for a standard registered server 
+#Replace the dummy values and put this file in the working directory.
+#In eclipse environment it is the project root directory.
+jco.server.connection_count=2
+jco.server.gwhost=localhost
+jco.server.progid=ZIK_JCO_SERVER
+jco.server.gwserv=sapgw00
+jco.server.repository_destination=ABAP_AS1
